@@ -1,0 +1,39 @@
+<?php
+
+/**
+ * @file
+ * Module file for well_known_uris.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function well_known_uris_menu() {
+    $items['admin/config/system/well-known-uris'] = array(
+        'title' => 'Well-known URIs',
+        'description' => 'Configure some well-known URIs.',
+        'page callback' => '_well_known_uris_admin_page',
+        'access arguments' => array('administer site configuration'),
+        'file' => 'well_known_uris.admin.inc',
+    );
+
+    $items['admin/config/system/well-known-uris/change-password'] = array(
+        'title' => 'Change password',
+        'description' => 'Configure the <code>/.well-known/change-password</code> URI.',
+        'page callback' => 'backdrop_get_form',
+        'page arguments' => array('_well_known_uris_change_password_form'),
+        'access arguments' => array('administer site configuration'),
+        'file' => 'well_known_uris.change_password.inc',
+    );
+
+    $items['.well-known/change-password'] = array(
+        'title' => 'Change password redirect',
+        'page callback' => '_well_known_uris_change_password_page',
+        'access callback' => 'config_get',
+        'access arguments' => array('well_known_uris.change_password', 'enabled'),
+        'file' => 'well_known_uris.change_password.inc',
+        'type' => MENU_CALLBACK,
+    );
+
+    return $items;
+}
