@@ -1,0 +1,17 @@
+{
+  "enabled": false,
+  "domain": "example.org",
+  "display_name": "Full display name",
+  "display_short_name": "Short display name",
+  "incoming_server_type": "imap",
+  "incoming_server_hostname": "imap.example.org",
+  "incoming_server_port": 143,
+  "incoming_server_socket_type": "STARTTLS",
+  "incoming_server_username": "%EMAILLOCALPART%",
+  "incoming_server_authentication": "password-cleartext",
+  "outgoing_server_hostname": "smtp.example.org",
+  "outgoing_server_port": 587,
+  "outgoing_server_socket_type": "STARTTLS",
+  "outgoing_server_username": "%EMAILLOCALPART%",
+  "outgoing_server_authentication": "password-cleartext"
+}

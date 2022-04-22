@@ -1,6 +1,6 @@
-name = Well Known URIs
+name = Well-known
 description = Provides some <a href="https://en.wikipedia.org/wiki/Well-known_URI" title="Wikipedia">well-known URIs</a>.
 backdrop = 1.x
 type = module
 tags[] = System
-configure = admin/config/system/well_known_uris
+configure = admin/config/system/well_known

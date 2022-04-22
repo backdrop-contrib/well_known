@@ -1,0 +1,57 @@
+<?php
+
+/**
+ * @file
+ * Module file for well_known.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function well_known_menu() {
+  $items['admin/config/system/well-known'] = array(
+    'title' => 'Well-known URIs',
+    'description' => 'Configure some <em>well-known</em> services.',
+    'page callback' => 'well_known_admin_page',
+    'access arguments' => array('administer site configuration'),
+    'file' => 'well_known.admin.inc',
+  );
+
+  $items['admin/config/system/well-known/autoconfig-mail'] = array(
+    'title' => 'Autoconfig mail',
+    'description' => 'Configure the <code>/.well-known/autoconfig/mail/config-v1.1.xml</code> URI.',
+    'page callback' => 'backdrop_get_form',
+    'page arguments' => array('well_known_autoconfig_mail_form'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'well_known.autoconfig_mail.inc',
+  );
+
+  $items['.well-known/autoconfig/mail/config-v1.1.xml'] = array(
+    'title' => 'Autoconfig mail configuration',
+    'page callback' => 'well_known_autoconfig_mail_page',
+    'access callback' => 'config_get',
+    'access arguments' => array('well_known.autoconfig_mail', 'enabled'),
+    'file' => 'well_known.autoconfig_mail.inc',
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['admin/config/system/well-known/change-password'] = array(
+    'title' => 'Change password',
+    'description' => 'Configure the <code>/.well-known/change-password</code> URI.',
+    'page callback' => 'backdrop_get_form',
+    'page arguments' => array('well_known_change_password_form'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'well_known.change_password.inc',
+  );
+
+  $items['.well-known/change-password'] = array(
+    'title' => 'Change password redirect',
+    'page callback' => 'well_known_change_password_page',
+    'access callback' => 'config_get',
+    'access arguments' => array('well_known.change_password', 'enabled'),
+    'file' => 'well_known.change_password.inc',
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}

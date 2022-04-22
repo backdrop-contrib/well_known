@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the well_known module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function well_known_install() {
+  /* Update default configuration values */
+  $site_name = config_get('system.core', 'site_name');
+  $autoconfig_mail_config = config('well_known.autoconfig_mail');
+  $autoconfig_mail_config->set('domain', $_SERVER['SERVER_NAME']);
+  $autoconfig_mail_config->set('display_name', $site_name . ' email configuration');
+  $autoconfig_mail_config->set('display_short_name', $site_name);
+  $autoconfig_mail_config->set('incoming_server_hostname', 'imap.' . $_SERVER['SERVER_NAME']);
+  $autoconfig_mail_config->set('outgoing_server_hostname', 'smtp.' . $_SERVER['SERVER_NAME']);
+  $autoconfig_mail_config->save();
+}

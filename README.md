@@ -1,4 +1,4 @@
-# Well-known URIs #
+# Well-known #
 
 A [Backdrop CMS](https://backdropcms.org/) module which provides
 some [well-known
@@ -8,7 +8,13 @@ The following *well-known* services are available:
 
 * `change-password`: A service which can be used by password managers to
   find the *change/reset password* page for a website. Read the draft W3C
-  specification: [A Well-Known URL for Changing Passwords](https://w3c.github.io/webappsec-change-password-url/).
+  specification: [A Well-Known URL for Changing
+  Passwords](https://w3c.github.io/webappsec-change-password-url/).
+
+* `autoconfig/mail`: Autoconfiguration service for email clients like
+  Thunderbird, Evolution, etc. Read more about [Thunderbird
+  autoconfiguration](https://wiki.mozilla.org/Thunderbird:Autoconfiguration)
+  and the associated [configuration file format](https://wiki.mozilla.org/Thunderbird:Autoconfiguration:ConfigFileFormat).
 
 ## Requirements ##
 
@@ -26,30 +32,17 @@ has made its way into your version of backdrop.
 
 * Replace your `.htaccess` file with the one provided by this module
   at `htaccess/modified.htaccess`, e.g. `cp
-  PATH_TO_CONTRIB_MODULES/well_known_uris/htaccess/modified.htaccess
+  PATH_TO_CONTRIB_MODULES/well_known/htaccess/modified.htaccess
   PATH_TO_DOCUMENT_ROOT/.htacess`.
   
 * Visit the configuration page under Administration > Configuration > System >
-  Well-known URIs (`admin/config/system/well-known-uris`) and
+  Well-known URIs (`admin/config/system/well-known`) and
   configure the services you require.
-
-<!-- Do not include if you have not created a wiki page. 
-## Documentation ##
-
-Additional documentation is located in [the -->
-<!-- Wiki](https://github.com/backdrop-contrib/foo-project/wiki/Documentation).
-
-## Further reading ##
-
--   Learn more about the [security.txt standard](https://securitytxt.org/)
--   Read the [draft RFC](https://tools.ietf.org/html/draft-foudil-securitytxt-02)
-
--->
 
 ## Issues ##
 
 Bugs and feature requests should be reported in [the Issue
-Queue](https://github.com/danieljrmay/well_known_uris/issues).
+Queue](https://github.com/danieljrmay/well_known/issues).
 
 ## Current Maintainers ##
 
