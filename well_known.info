@@ -1,5 +1,5 @@
 name = Well-known
-description = Provides some <a href="https://en.wikipedia.org/wiki/Well-known_URI" title="Wikipedia">well-known URIs</a>.
+description = Provides some <a href="https://en.wikipedia.org/wiki/Well-known_URI" title="Wikipedia">well-known services</a>.
 backdrop = 1.x
 type = module
 tags[] = System

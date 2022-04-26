@@ -10,7 +10,7 @@
  */
 function well_known_menu() {
   $items['admin/config/system/well-known'] = array(
-    'title' => 'Well-known URIs',
+    'title' => 'Well-known services',
     'description' => 'Configure some <em>well-known</em> services.',
     'page callback' => 'well_known_admin_page',
     'access arguments' => array('administer site configuration'),
@@ -19,7 +19,7 @@ function well_known_menu() {
 
   $items['admin/config/system/well-known/autoconfig-mail'] = array(
     'title' => 'Autoconfig mail',
-    'description' => 'Configure the <code>/.well-known/autoconfig/mail/config-v1.1.xml</code> URI.',
+    'description' => 'Allow email clients to automatically configure themselves for your domain.',
     'page callback' => 'backdrop_get_form',
     'page arguments' => array('well_known_autoconfig_mail_form'),
     'access arguments' => array('administer site configuration'),
@@ -35,9 +35,24 @@ function well_known_menu() {
     'type' => MENU_CALLBACK,
   );
 
+  /* The autoconfig-mail standard defines
+   * http(s)://autoconfig.example.org/mail/config-v1.1.xml as an additional
+   * location. This entry will only be useful if this site is configured to
+   * responde to requests to the autoconfig.example.org domain which will
+   * require appropriate DNS enteries and webserver configuration.
+   */
+  $items['mail/config-v1.1.xml'] = array(
+    'title' => 'Autoconfig mail configuration',
+    'page callback' => 'well_known_autoconfig_mail_page',
+    'access callback' => 'config_get',
+    'access arguments' => array('well_known.autoconfig_mail', 'enabled'),
+    'file' => 'well_known.autoconfig_mail.inc',
+    'type' => MENU_CALLBACK,
+  );
+
   $items['admin/config/system/well-known/change-password'] = array(
     'title' => 'Change password',
-    'description' => 'Configure the <code>/.well-known/change-password</code> URI.',
+    'description' => 'Allow password managers to redirect users to your site\'s <em>change password</em> page.',
     'page callback' => 'backdrop_get_form',
     'page arguments' => array('well_known_change_password_form'),
     'access arguments' => array('administer site configuration'),

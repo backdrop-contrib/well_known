@@ -15,7 +15,13 @@ function well_known_change_password_form() {
     '#type' => 'checkbox',
     '#title' => t('Enable the <em>change-password</em> service'),
     '#default_value' => config_get('well_known.change_password', 'enabled'),
-    '#description' => t('When enabled the <code>/.well-known/change-password</code> path will redirect to the change password page.'),
+    '#description' => t('When enabled the URL <a href="@href">@text</a> will redirect to a page which allows a user to update their password.',
+    array(
+      '@href' => '/.well-known/change-password',
+      '@text' => url('.well-known/change-password', array('absolute' => TRUE)),
+    ),
+    ),
+
   );
 
   $form['submit'] = array(
