@@ -17,7 +17,18 @@ class WellKnownUrisBaseWebTestCase extends BackdropWebTestCase {
   const CHANGE_PASSWORD_URL = '.well-known/change-password';
   const CHANGE_PASSWORD_ADMIN_URL = 'admin/config/system/well-known/change-password';
 
+  /**
+   * Authenticated user with no special permissions.
+   *
+   * @var object
+   */
   protected $authenticatedUser;
+
+  /**
+   * Administrator user with all relevant permissions.
+   *
+   * @var object
+   */
   protected $administratorUser;
 
 }
