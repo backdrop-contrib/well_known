@@ -70,3 +70,20 @@ function well_known_menu() {
 
   return $items;
 }
+
+/**
+ * Implements hook_config_info().
+ */
+function well_known_config_info() {
+  $prefixes['well_known.autoconfig_mail'] = array(
+    'label' => t('Autoconfig mail settings'),
+    'group' => t('Configuration'),
+  );
+
+  $prefixes['well_known.change_password'] = array(
+    'label' => t('Change password settings'),
+    'group' => t('Configuration'),
+  );
+
+  return $prefixes;
+}
