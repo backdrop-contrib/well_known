@@ -24,6 +24,11 @@ fix for "[issue
 5583](https://github.com/backdrop/backdrop-issues/issues/5583#issue-1200228154)"
 has made its way into your version of backdrop.
 
+**Note:** `htaccess/original.htaccess` is a copy of the default
+`.htaccess` file from backdrop version 1.21.4 which
+`modified.htaccess` is based on, it is only present for comparison
+purposes.
+
 ## Installation ##
 
 * Install this module in the usual way, see the [contributed
