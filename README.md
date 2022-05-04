@@ -18,11 +18,15 @@ The following *well-known* services are available:
 
 ## Requirements ##
 
-You must replace your `.htaccess` file with the one provided by this
-module at `htaccess/modified.htaccess`. This will be required until a
-fix for "[issue
-5583](https://github.com/backdrop/backdrop-issues/issues/5583#issue-1200228154)"
-has made its way into your version of backdrop.
+If you are using backdrop version 1.21.5 or later then there are no
+special requirements.
+
+However, if you are using backdrop version 1.21.4 or earlier then you
+must replace your `.htaccess` file with the one provided by this
+module at `htaccess/modified.htaccess`. This is because the original
+`.htaccess` file does not allow backdrop to serve pages starting with
+the `.well-known`path, see [issue
+5583](https://github.com/backdrop/backdrop-issues/issues/5583#issue-1200228154).
 
 **Note:** `htaccess/original.htaccess` is a copy of the default
 `.htaccess` file from backdrop version 1.21.4 which
@@ -35,7 +39,8 @@ purposes.
   modules](https://docs.backdropcms.org/documentation/contributed-modules)
   of the user guide for details.
 
-* Replace your `.htaccess` file with the one provided by this module
+* If you are using backdrop version 1.21.4 or earlier then you must
+  replace your `.htaccess` file with the one provided by this module
   at `htaccess/modified.htaccess`, e.g. `cp
   PATH_TO_CONTRIB_MODULES/well_known/htaccess/modified.htaccess
   PATH_TO_DOCUMENT_ROOT/.htacess`.
@@ -47,7 +52,7 @@ purposes.
 ## Issues ##
 
 Bugs and feature requests should be reported in [the Issue
-Queue](https://github.com/danieljrmay/well_known/issues).
+Queue](https://github.com/backdrop-contrib/well_known/issues).
 
 ## Current Maintainers ##
 
@@ -61,3 +66,14 @@ Queue](https://github.com/danieljrmay/well_known/issues).
 
 This project is GPL v2 software. See the LICENSE.txt file in this
 directory for complete text.
+
+## Further Reading ##
+
+* [Wikipedia](https://en.wikipedia.org/wiki/Well-known_URI) has a good
+  list of the various *well-known* services.
+* The [draft *change-password*
+  specification](https://w3c.github.io/webappsec-change-password-url/).
+* The [thunderbird *autoconfig/mail* project
+  page](https://wiki.mozilla.org/Thunderbird:Autoconfiguration) and
+  associated [configuration file format
+  specification](https://wiki.mozilla.org/Thunderbird:Autoconfiguration:ConfigFileFormat).
