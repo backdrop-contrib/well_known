@@ -6,8 +6,8 @@ services](https://en.wikipedia.org/wiki/Well-known_URI "Wikipedia").
 
 The following *well-known* services are available:
 
-* `change-password`: A service which can be used by password managers to
-  find the *change/reset password* page for a website. Read the draft W3C
+* `change-password`: A service which can be used by password managers
+  to find a website’s *change password* page. Read the draft W3C
   specification: [A Well-Known URL for Changing
   Passwords](https://w3c.github.io/webappsec-change-password-url/).
 
