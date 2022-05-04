@@ -60,6 +60,6 @@ function well_known_change_password_page() {
     backdrop_goto('user/' . $GLOBALS['user']->uid . '/edit');
   }
   else {
-    backdrop_goto('user/password');
+    backdrop_goto('user/login', array('query' => array('destination' => '.well-known/change-password')));
   }
 }
