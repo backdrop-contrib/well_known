@@ -29,6 +29,7 @@ function well_known_menu() {
   $items['.well-known/autoconfig/mail/config-v1.1.xml'] = array(
     'title' => 'Autoconfig mail configuration',
     'page callback' => 'well_known_autoconfig_mail_page',
+    'delivery callback' => 'well_known_xml_deliver',
     'access callback' => 'config_get',
     'access arguments' => array('well_known.autoconfig_mail', 'enabled'),
     'file' => 'well_known.autoconfig_mail.inc',
@@ -44,6 +45,7 @@ function well_known_menu() {
   $items['mail/config-v1.1.xml'] = array(
     'title' => 'Autoconfig mail configuration',
     'page callback' => 'well_known_autoconfig_mail_page',
+    'delivery callback' => 'well_known_xml_deliver',
     'access callback' => 'config_get',
     'access arguments' => array('well_known.autoconfig_mail', 'enabled'),
     'file' => 'well_known.autoconfig_mail.inc',
@@ -86,4 +88,74 @@ function well_known_config_info() {
   );
 
   return $prefixes;
+}
+
+/**
+ * Packages and sends the result of a page callback to the browser as XML.
+ *
+ * @param mixed $page_callback_result
+ *   The result of a page callback. Can be one of:
+ *   - NULL: to indicate no content.
+ *   - An integer menu status constant: to indicate an error condition.
+ *   - An array of XML elements to be passed to format_xml_elements().
+ *   - A string of XML which should be output as-is.
+ *
+ * @see backdrop_deliver_page()
+ * @see backdrop_deliver_html_page()
+ */
+function well_known_xml_deliver($page_callback_result) {
+  $output = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
+
+  // Menu status constants are integers, XML content is either an array which
+  // will be fed to the format_xml_elements function, or a string which will be
+  // output as is.
+  if (is_int($page_callback_result)) {
+    switch ($page_callback_result) {
+      case MENU_NOT_FOUND:
+        backdrop_add_http_header('Status', '404 Not Found');
+        watchdog('page not found', check_plain($_GET['q']), NULL, WATCHDOG_WARNING);
+        $output .= '<error>' . t('Page not found') . '</error>';
+        break;
+
+      case MENU_ACCESS_DENIED:
+        backdrop_add_http_header('Status', '403 Forbidden');
+        watchdog('access denied', check_plain($_GET['q']), NULL, WATCHDOG_WARNING);
+        $output .= '<error>' . t('Access denied') . '</error>';
+        break;
+
+      case MENU_SITE_OFFLINE:
+        backdrop_add_http_header('Status', '503 Service unavailable');
+        $output .= '<error>' . t('Site is offline') . '</error>';
+        break;
+
+      default:
+        backdrop_add_http_header('Status', '500 Internal Server Error');
+        $output .= '<error>' . t('Internal Server Error') . '</error>';
+        break;
+    }
+  }
+  elseif (is_array($page_callback_result)) {
+    $output .= format_xml_elements($page_callback_result);
+  }
+  elseif (is_string($page_callback_result)) {
+    $output = $page_callback_result;
+  }
+  elseif (is_null($page_callback_result)) {
+    backdrop_add_http_header('Status', '501 Not Implemented');
+    watchdog('no page content', check_plain($_GET['q']), NULL, WATCHDOG_WARNING);
+    $output .= '<error>' . t('No page content') . '</error>';
+  }
+  else {
+    backdrop_add_http_header('Status', '500 Internal Server Error');
+    $output .= '<error>' . t('Internal Server Error') . '</error>';
+  }
+
+  // Set the content-type as XML.
+  backdrop_add_http_header('Content-Type', 'application/xml; charset=utf-8');
+
+  // Echo the output.
+  echo $output;
+
+  // Perform end-of-request tasks.
+  backdrop_page_footer();
 }

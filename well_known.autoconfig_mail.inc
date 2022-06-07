@@ -333,12 +333,7 @@ function well_known_autoconfig_mail_page() {
     ),
   );
 
-  $output = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
-  $output .= format_xml_elements($xml_elements);
-
-  backdrop_add_http_header('Content-Type', 'application/xml; charset=utf-8');
-  echo $output;
-  backdrop_page_footer();
+  return $xml_elements;
 }
 
 /**
