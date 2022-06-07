@@ -3,4 +3,4 @@ description = Provides some <a href="https://en.wikipedia.org/wiki/Well-known_UR
 backdrop = 1.x
 type = module
 tags[] = System
-configure = admin/config/system/well_known
+configure = admin/config/system/well-known
