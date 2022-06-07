@@ -18,7 +18,7 @@ The following *well-known* services are available:
 
 ## Requirements ##
 
-If you are using backdrop version 1.21.5 or later then there are no
+If you are using backdrop version 1.22.0 or later then there are no
 special requirements.
 
 However, if you are using backdrop version 1.21.4 or earlier then you
